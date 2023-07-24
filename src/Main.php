@@ -10,7 +10,13 @@ final class Main
 {
     public static function run(): int
     {
-        $client = new PubSubClient();
+        $projectId = \getenv('GOOGLE_CLOUD_PROJECT');
+
+        $client = new PubSubClient([
+            'projectId' => $projectId,
+        ]);
+
+        self::log("Set project id to " . $projectId);
 
         $topic = $client->topic('dead-letter-topic');
 
