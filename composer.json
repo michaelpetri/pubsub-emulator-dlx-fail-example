@@ -1,0 +1,21 @@
+{
+    "name": "michaelpetri/pubsub-emulator-dlx-fail-example",
+    "type": "project",
+    "description": "Example to show pub/sub emulator can't handle subscriptions with dead letter exchange config.",
+    "authors": [
+        {
+            "name": "Michael Petri",
+            "email": "mpetri@lyska.io"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "~8.2.0",
+        "google/cloud-pubsub": "^1.45"
+    },
+    "autoload": {
+        "psr-4": {
+            "MichaelPetri\\PubSubExmulatorDlxFailExample\\": "src/"
+        }
+    }
+}

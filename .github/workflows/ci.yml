@@ -1,0 +1,15 @@
+name: "Continuous Integration"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  run:
+    name: "Run docker compose"
+    runs-on: ubuntu-latest
+    steps:
+      -   name: "Checkout source code"
+          uses: actions/checkout@v3
+      -   name: "Run php container"
+          run: docker compose up php

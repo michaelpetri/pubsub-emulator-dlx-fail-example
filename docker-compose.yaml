@@ -1,0 +1,18 @@
+services:
+  php:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      GOOGLE_CLOUD_PROJECT: pubsub-emulator
+      PUBSUB_EMULATOR_HOST: http://pubsub:8085
+    depends_on:
+      pubsub:
+        condition: service_healthy
+  pubsub:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:437.0.0-emulators
+    command: [
+      "gcloud", "beta", "emulators", "pubsub", "start",
+      "--project=pubsub-emulator", "--host-port=0.0.0.0:8085"
+    ]
+    healthcheck:
+      test: curl http://127.0.0.1:8085
