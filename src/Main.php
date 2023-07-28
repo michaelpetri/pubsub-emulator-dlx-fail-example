@@ -37,22 +37,19 @@ final class Main
             self::log("Topic deleted");
         }
 
-        try {
-            $client
-                ->createTopic('topic')
-                ->subscribe('subscription-with-dlx', [
-                    'messageRetentionDuration' => '86400s',
-                    'enableMessageOrdering' => true,
-                    'enableExactlyOnceDelivery' => false,
-                    'deadLetterPolicy' => [
-                        'deadLetterTopic' => 'projects/pubsub-emulator/topics/dead-letter-topic',
-                        'maxDeliveryAttempts' => 5,
-                    ],
-                ])
-                ->create();
-        } catch (\Throwable $e) {
-            self::log("Failed to create subscription: " . $e->getMessage());
-        }
+        $topic
+            ->subscribe('subscription-with-dlx', [
+                'messageRetentionDuration' => '86400s',
+                'enableMessageOrdering' => true,
+                'enableExactlyOnceDelivery' => false,
+                'deadLetterPolicy' => [
+                    'deadLetterTopic' => 'projects/emulator-project/topics/dead-letter-topic',
+                    'maxDeliveryAttempts' => 5,
+                ],
+            ])
+            ->create();
+
+        self::log('Subscription with Dead Letter Topic created');
 
         return 0;
     }
