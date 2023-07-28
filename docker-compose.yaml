@@ -12,7 +12,7 @@ services:
     image: gcr.io/google.com/cloudsdktool/cloud-sdk:437.0.0-emulators
     command: [
       "gcloud", "beta", "emulators", "pubsub", "start",
-      "--project=pubsub-emulator", "--host-port=0.0.0.0:8085"
+      "--project=emulator-project", "--host-port=0.0.0.0:8085"
     ]
     healthcheck:
       test: curl http://127.0.0.1:8085
